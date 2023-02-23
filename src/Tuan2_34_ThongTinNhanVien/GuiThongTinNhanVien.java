@@ -137,7 +137,6 @@ public class GuiThongTinNhanVien extends JFrame{
 	
 	public static void main(String[] args) {
 		new GuiThongTinNhanVien().setVisible(true);
-		// test github 
 	}
 	
 }

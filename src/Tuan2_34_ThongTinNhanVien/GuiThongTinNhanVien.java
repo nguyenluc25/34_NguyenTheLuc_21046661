@@ -167,9 +167,8 @@ public class GuiThongTinNhanVien extends JFrame {
 		model.addColumn("Tuoi");
 		model.addColumn("Tien luong");
 		TableColumn phaiColumn = tblNV.getColumnModel().getColumn(3);
-		JComboBox comboBox = new JComboBox();
-		comboBox.addItem("Nam");
-		comboBox.addItem("Nu");
+		String[] options = {"Nam", "Nu"};
+		JComboBox<String> comboBox = new JComboBox<>(options);
 		phaiColumn.setCellEditor(new DefaultCellEditor(comboBox));
 		model.addRow(data);
 		model.addRow(data1);

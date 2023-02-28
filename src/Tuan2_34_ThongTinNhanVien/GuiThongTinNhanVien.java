@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,16 +17,22 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class GuiThongTinNhanVien extends JFrame {
+public class GuiThongTinNhanVien extends JFrame implements ActionListener, MouseListener{
+
+	private NhanVien_Collection listNV;
+
 	private JLabel lblMaNV;
 	private JLabel lblHo;
 	private JLabel lblTen;
@@ -46,6 +55,10 @@ public class GuiThongTinNhanVien extends JFrame {
 	private JButton btnXoaTrang;
 	private JButton btnXoa;
 	private JButton btnLuu;
+
+	private TableColumn phaiColumn;
+
+	private JComboBox comboBox;
 
 	public GuiThongTinNhanVien() {
 		// TODO Auto-generated constructor stub
@@ -101,7 +114,7 @@ public class GuiThongTinNhanVien extends JFrame {
 		lblTuoi.setPreferredSize(lblMaNV.getPreferredSize());
 		b3.add(txtTuoi);
 		b3.add(lblPhai);
-		radioBtnNam = new JRadioButton("Nam");
+		radioBtnNam = new JRadioButton("Nam", true);
 		radioBtnNu = new JRadioButton("Nu");
 		b3.add(radioBtnNam);
 		b3.add(radioBtnNu);
@@ -149,30 +162,42 @@ public class GuiThongTinNhanVien extends JFrame {
 		split.add(panelSouthLeft);
 		split.add(panelSouthRight);
 		add(panelSouth, BorderLayout.SOUTH);
+
+		listNV = new NhanVien_Collection();
 		
+		NhanVien nv1 = new NhanVien("1111", "Nguyen", "Hoang", 26, "Nam", 4500);
+		NhanVien nv2 = new NhanVien("2222", "Le", "Thu", 28, "Nu", 5000);
+		NhanVien nv3 = new NhanVien("3333", "Hoang", "Le", 30, "Nam", 5000);
+		NhanVien nv4 = new NhanVien("4444", "Tran", "Lan", 27, "Nu", 3500);
+		
+		listNV.themNhanVien(nv1);
+		listNV.themNhanVien(nv2);
+		listNV.themNhanVien(nv3);
+		listNV.themNhanVien(nv4);
+		
+		docDuLieuTuArrayListVaoModel();
+		
+		btnThem.addActionListener(this);
+		btnTim.addActionListener(this);
+		btnXoa.addActionListener(this);
+		btnXoaTrang.addActionListener(this);
 		
 	}
 
 	private void taoBang() {
-		String data[] = { "1111", "Nguyen", "Hoang", "Nam", "26", "4500" };
-		String data1[] = { "2222", "Le", "Thu", "Nu", "28", "5000" };
-		String data2[] = { "3333", "Hoang", "Le", "Nam", "27", "3500" };
 		JPanel panelTable = new JPanel();
 		model = new DefaultTableModel();
 		tblNV = new JTable(model);
 		model.addColumn("Ma NV");
 		model.addColumn("Ho");
 		model.addColumn("Ten");
-		model.addColumn("Phai");
 		model.addColumn("Tuoi");
+		model.addColumn("Phai");
 		model.addColumn("Tien luong");
-		TableColumn phaiColumn = tblNV.getColumnModel().getColumn(3);
-		String[] options = {"Nam", "Nu"};
-		JComboBox<String> comboBox = new JComboBox<>(options);
+		phaiColumn = tblNV.getColumnModel().getColumn(4);
+		String[] options = { "Nam", "Nu" };
+		comboBox = new JComboBox<>(options);
 		phaiColumn.setCellEditor(new DefaultCellEditor(comboBox));
-		model.addRow(data);
-		model.addRow(data1);
-		model.addRow(data2);
 		panelTable.add(tblNV);
 		JScrollPane sp = new JScrollPane(tblNV, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -180,4 +205,125 @@ public class GuiThongTinNhanVien extends JFrame {
 		panelCenter.add(sp);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Object o = e.getSource();
+		if (o.equals(btnThem)) {
+			String ma = txtMaNV.getText();
+			String ho = txtHo.getText();
+			String ten = txtTen.getText();
+			int tuoi = Integer.parseInt(txtTuoi.getText());
+			String phai;
+			if (radioBtnNam.isSelected()) {
+				phai = "Nam";
+			} else
+				phai = "Nu";
+
+			double luong = Double.parseDouble(txtTienLuong.getText());
+
+			NhanVien nv = new NhanVien(ma, ho, ten, tuoi, phai, luong);
+			if (!listNV.themNhanVien(nv)) {
+				JOptionPane.showMessageDialog(this, "Trung");
+			} else {
+				model.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), nv.getTuoi(), nv.getPhai(),
+						nv.getLuong() });
+			}
+		}
+		if (o.equals(btnXoa)) {
+			int r = tblNV.getSelectedRow();
+			// Xoa trong table
+			model.removeRow(r);
+			// Xoa trong ArrayList
+			NhanVien nv = listNV.getElement(r);
+			listNV.xoaNhanVien(nv.getMaNV());
+		}
+
+		if (o.equals(btnXoaTrang)) {
+			txtMaNV.setText("");
+			txtHo.setText("");
+			txtTen.setText("");
+			txtTuoi.setText("");
+			txtTienLuong.setText("");
+		}
+		
+		if(o.equals(btnTim)) {
+			timTheoMaNV();
+		}
+	}
+
+	private void docDuLieuTuArrayListVaoModel() {
+		for (int i = 0; i < listNV.getSize(); i++) {
+			NhanVien nv = listNV.getElement(i);
+			model.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), nv.getTuoi(), nv.getPhai(),
+					nv.getLuong() });
+		}
+	}
+
+	private void xoaHetDuLieuTrenTableModel() {
+		DefaultTableModel dm = (DefaultTableModel) tblNV.getModel();
+		dm.getDataVector().removeAllElements();
+	}
+
+	private void timTheoMaNV() {
+		String maNV = txtTim.getText();
+		if (maNV != null && maNV.trim().length() > 0) {
+			try {
+				NhanVien nv = listNV.timKiem(maNV);
+				if (nv != null) {
+					xoaHetDuLieuTrenTableModel();
+					model.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), nv.getTuoi(), nv.getPhai(),
+							nv.getLuong() });
+				} else {
+					JOptionPane.showMessageDialog(this,"Khong tim thay");
+					return ;
+				}
+			} catch (Exception ex) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(this,"Du lieu khong hop le");
+				txtTim.selectAll();
+				txtTim.requestFocus();
+			}
+		} else {
+			xoaHetDuLieuTrenTableModel();
+			docDuLieuTuArrayListVaoModel();
+			tblNV.setModel(model);
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int row = tblNV.getSelectedRow();
+		txtMaNV.setText(model.getValueAt(row, 0).toString());
+		txtHo.setText(model.getValueAt(row, 1).toString());
+		txtTen.setText(model.getValueAt(row, 2).toString());
+		txtTuoi.setText(model.getValueAt(row, 3).toString());
+		comboBox.setSelectedItem(model.getValueAt(row, 4).toString());
+		txtMaNV.setText(model.getValueAt(row, 5).toString());
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

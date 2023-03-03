@@ -204,6 +204,7 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 //			 TODO: handle exception
 			e.printStackTrace();
 		}
+//		taoCung();
 		// sự kiện
 		btnThem.addActionListener(this);
 		btnXoa.addActionListener(this);

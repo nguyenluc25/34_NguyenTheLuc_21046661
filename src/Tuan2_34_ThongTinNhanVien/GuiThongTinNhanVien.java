@@ -24,185 +24,200 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class GuiThongTinNhanVien extends JFrame implements ActionListener, MouseListener{
+public class GUIThongTinNhanVien extends JFrame implements ActionListener, MouseListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private NhanVien_Collection listNV;
 
-	private JLabel lblMaNV;
-	private JLabel lblHo;
-	private JLabel lblTen;
-	private JLabel lblTuoi;
-	private JLabel lblPhai;
-	private JLabel lblTienLuong;
-	private JPanel panelCenter;
-	private JTable tblNV;
-	private DefaultTableModel model;
 	private JTextField txtMaNV;
 	private JTextField txtHo;
 	private JTextField txtTen;
 	private JTextField txtTuoi;
-	private JTextField txtTienLuong;
 	private JRadioButton radioBtnNam;
 	private JRadioButton radioBtnNu;
+	private JTextField txtLuong;
+	private DefaultTableModel modelNhanVien;
+	private JTable tableNhanVien;
 	private JTextField txtTim;
 	private JButton btnTim;
 	private JButton btnThem;
 	private JButton btnXoaTrang;
 	private JButton btnXoa;
+	private JButton btnSua;
 	private JButton btnLuu;
+	private JButton btnLamMoi;
+	private ButtonGroup group;
 
-	private TableColumn phaiColumn;
 
-	private JComboBox comboBox;
 
-	public GuiThongTinNhanVien() {
+	public GUIThongTinNhanVien() {
 		// TODO Auto-generated constructor stub
+		// thiết lập thuộc tính cho JFrame
 		setTitle("^-^");
-		setSize(700, 500);
+		setSize(730, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		// North
+		// phần north
+
+		// khai báo các component
 		JPanel panelNorth = new JPanel();
-		JLabel lblTitle = new JLabel("THONG TIN SINH VIEN");
-		lblTitle.setFont(new Font("Arial", Font.BOLD, 25));
+		JLabel lblTitle = new JLabel("THÔNG TIN NHÂN VIÊN");
+
+		// thiêt lập component
 		lblTitle.setForeground(Color.BLUE);
+		lblTitle.setFont(new Font("Arial", Font.BOLD, 25));
+
 		panelNorth.add(lblTitle);
-		add(panelNorth, BorderLayout.NORTH);
+		// thêm các component vào JFrame
+		this.add(panelNorth, BorderLayout.NORTH);
 
-		// Center
-		panelCenter = new JPanel();
+		// phần center
+
+		// khai báo các component
+		JPanel panelCenter = new JPanel();
 		panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
-		JPanel panelNhap = new JPanel();
 
-		Box b = Box.createVerticalBox();
+		// phần nhập dữ liệu
 		Box b1 = Box.createHorizontalBox();
 		Box b2 = Box.createHorizontalBox();
 		Box b3 = Box.createHorizontalBox();
 		Box b4 = Box.createHorizontalBox();
 
-		lblMaNV = new JLabel("Ma nhan vien: ");
-		txtMaNV = new JTextField(54);
-		lblHo = new JLabel("Ho: ");
+		JLabel lblMaNV = new JLabel("Mã nhân viên: ");
+		txtMaNV = new JTextField(55);
+		JLabel lblHo = new JLabel("Họ: ");
 		txtHo = new JTextField();
-		lblTen = new JLabel("Ten nhan vien: ");
+		JLabel lblTen = new JLabel("Tên nhân viên: ");
 		txtTen = new JTextField();
-		lblTuoi = new JLabel("Tuoi: ");
+		JLabel lblTuoi = new JLabel("Tuổi: ");
 		txtTuoi = new JTextField();
-		lblPhai = new JLabel("Phai: ");
-		lblTienLuong = new JLabel("Tien luong: ");
-		txtTienLuong = new JTextField();
+		JLabel lblPhai = new JLabel("Phái: ");
+		radioBtnNam = new JRadioButton("Nam", true);
+		radioBtnNu = new JRadioButton("Nữ");
+		group = new ButtonGroup();
+		JLabel lblLuong = new JLabel("Tiền Lương: ");
+		txtLuong = new JTextField();
 
+		// thêm component vào JFrame
 		b1.add(lblMaNV);
 		b1.add(txtMaNV);
-		b.add(b1);
-		b.add(Box.createVerticalStrut(5));
+		panelCenter.add(b1);
+		panelCenter.add(Box.createVerticalStrut(5));
 		b2.add(lblHo);
 		b2.add(txtHo);
 		b2.add(lblTen);
 		b2.add(txtTen);
-		lblHo.setPreferredSize(lblMaNV.getPreferredSize());
-		b.add(b2);
-		b.add(Box.createVerticalStrut(5));
+		panelCenter.add(b2);
+		panelCenter.add(Box.createVerticalStrut(5));
 		b3.add(lblTuoi);
-		lblTuoi.setPreferredSize(lblMaNV.getPreferredSize());
 		b3.add(txtTuoi);
 		b3.add(lblPhai);
-		radioBtnNam = new JRadioButton("Nam", true);
-		radioBtnNu = new JRadioButton("Nu");
-		b3.add(radioBtnNam);
-		b3.add(radioBtnNu);
-		ButtonGroup group = new ButtonGroup();
 		group.add(radioBtnNam);
 		group.add(radioBtnNu);
-		b.add(b3);
-		b.add(Box.createVerticalStrut(5));
-		b4.add(lblTienLuong);
-		lblTienLuong.setPreferredSize(lblMaNV.getPreferredSize());
-		b4.add(txtTienLuong);
-		b.add(b4);
-		b.add(Box.createVerticalStrut(5));
-		panelNhap.add(b);
+		b3.add(radioBtnNam);
+		b3.add(radioBtnNu);
+		panelCenter.add(b3);
+		panelCenter.add(Box.createVerticalStrut(5));
+		b4.add(lblLuong);
+		b4.add(txtLuong);
+		panelCenter.add(b4);
+		panelCenter.add(Box.createVerticalStrut(5));
 
-		panelCenter.add(panelNhap);
-		taoBang();
-		add(panelCenter, BorderLayout.CENTER);
 
-		// South
+		lblHo.setPreferredSize(lblMaNV.getPreferredSize());
+		lblTuoi.setPreferredSize(lblMaNV.getPreferredSize());
+		lblLuong.setPreferredSize(lblMaNV.getPreferredSize());
+
+		// phần table
+		String[] column = { "Mã NV", "Họ", "Tên", "Phái", "Tuổi", "Tiền lương" };
+		String[] options = { "Nam", "Nữ" };
+
+		// khai báo các component
+		JPanel panelTable = new JPanel();
+		modelNhanVien = new DefaultTableModel(column, 0);
+		tableNhanVien = new JTable(modelNhanVien);
+		JScrollPane sp = new JScrollPane(tableNhanVien, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		TableColumn phaiColumn;
+		JComboBox<String> comboBox = new JComboBox<>(options);
+
+		// thiết lập các component
+		phaiColumn = tableNhanVien.getColumnModel().getColumn(3);
+		phaiColumn.setCellEditor(new DefaultCellEditor(comboBox));
+		sp.setPreferredSize(new Dimension(715, 250));
+
+		// thêm các component vào JFrame
+		panelTable.add(sp);
+		panelCenter.add(panelTable);
+		this.add(panelCenter, BorderLayout.CENTER);
+
+		// phần south
 		JPanel panelSouth = new JPanel();
 
 		JPanel panelSouthLeft = new JPanel();
-		JLabel lblTim = new JLabel("Nhap ma so can tim: ");
-		txtTim = new JTextField(15);
-		btnTim = new JButton("Tim");
+		JLabel lblTim = new JLabel("Nhập mã số cần tìm: ");
+		txtTim = new JTextField(7);
+		btnTim = new JButton("Tìm");
+
 		panelSouthLeft.add(lblTim);
 		panelSouthLeft.add(txtTim);
 		panelSouthLeft.add(btnTim);
-		panelSouth.add(panelSouthLeft);
 
 		JPanel panelSouthRight = new JPanel();
-		btnThem = new JButton("Them");
-		btnXoa = new JButton("Xoa");
-		btnXoaTrang = new JButton("Xoa trang");
-		btnLuu = new JButton("Luu");
+		btnThem = new JButton("Thêm");
+		btnXoaTrang = new JButton("Xóa trắng");
+		btnXoa = new JButton("Xóa");
+		btnSua = new JButton("Sửa");
+		btnLuu = new JButton("Lưu");
+		btnLamMoi = new JButton("Làm mới");
+		
+		panelSouthRight.add(btnLamMoi);
 		panelSouthRight.add(btnThem);
-		panelSouthRight.add(btnXoa);
 		panelSouthRight.add(btnXoaTrang);
+		panelSouthRight.add(btnXoa);
+		panelSouthRight.add(btnSua);
 		panelSouthRight.add(btnLuu);
-		panelSouth.add(panelSouthRight);
 
-		JSplitPane split;
-		panelSouth.add(split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT));
+		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		panelSouth.add(panelSouthLeft);
+		panelSouth.add(panelSouthRight);
 		split.add(panelSouthLeft);
 		split.add(panelSouthRight);
-		add(panelSouth, BorderLayout.SOUTH);
-
+		panelSouth.add(split);
+		this.add(panelSouth, BorderLayout.SOUTH);
+		
 		listNV = new NhanVien_Collection();
-		
-		NhanVien nv1 = new NhanVien("1111", "Nguyen", "Hoang", 26, "Nam", 4500);
-		NhanVien nv2 = new NhanVien("2222", "Le", "Thu", 28, "Nu", 5000);
-		NhanVien nv3 = new NhanVien("3333", "Hoang", "Le", 30, "Nam", 5000);
-		NhanVien nv4 = new NhanVien("4444", "Tran", "Lan", 27, "Nu", 3500);
-		
-		listNV.themNhanVien(nv1);
-		listNV.themNhanVien(nv2);
-		listNV.themNhanVien(nv3);
-		listNV.themNhanVien(nv4);
-		
-		docDuLieuTuArrayListVaoModel();
-		
+		StoredData stData = new StoredData();
+		try {
+			listNV = (NhanVien_Collection) stData.readFile("data//DsNV.txt");
+			docDuLieuTuArrayListVaoModel();
+		} catch (Exception e) {
+//			 TODO: handle exception
+			e.printStackTrace();
+		}
+		// sự kiện
 		btnThem.addActionListener(this);
-		btnTim.addActionListener(this);
 		btnXoa.addActionListener(this);
 		btnXoaTrang.addActionListener(this);
-		
+		btnSua.addActionListener(this);
+		btnTim.addActionListener(this);
+		btnLuu.addActionListener(this);
+		btnLamMoi.addActionListener(this);
+		tableNhanVien.addMouseListener(this);
+
 	}
 
-	private void taoBang() {
-		JPanel panelTable = new JPanel();
-		model = new DefaultTableModel();
-		tblNV = new JTable(model);
-		model.addColumn("Ma NV");
-		model.addColumn("Ho");
-		model.addColumn("Ten");
-		model.addColumn("Tuoi");
-		model.addColumn("Phai");
-		model.addColumn("Tien luong");
-		phaiColumn = tblNV.getColumnModel().getColumn(4);
-		String[] options = { "Nam", "Nu" };
-		comboBox = new JComboBox<>(options);
-		phaiColumn.setCellEditor(new DefaultCellEditor(comboBox));
-		panelTable.add(tblNV);
-		JScrollPane sp = new JScrollPane(tblNV, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sp.setPreferredSize(new Dimension(650, 250));
-		panelCenter.add(sp);
+	public static void main(String[] args) {
+		new GUIThongTinNhanVien().setVisible(true);
 	}
 
 	@Override
@@ -210,97 +225,174 @@ public class GuiThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		// TODO Auto-generated method stub
 		Object o = e.getSource();
 		if (o.equals(btnThem)) {
-			String ma = txtMaNV.getText();
-			String ho = txtHo.getText();
-			String ten = txtTen.getText();
-			int tuoi = Integer.parseInt(txtTuoi.getText());
-			String phai;
-			if (radioBtnNam.isSelected()) {
-				phai = "Nam";
-			} else
-				phai = "Nu";
-
-			double luong = Double.parseDouble(txtTienLuong.getText());
-
-			NhanVien nv = new NhanVien(ma, ho, ten, tuoi, phai, luong);
-			if (!listNV.themNhanVien(nv)) {
-				JOptionPane.showMessageDialog(this, "Trung");
-			} else {
-				model.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), nv.getTuoi(), nv.getPhai(),
-						nv.getLuong() });
+			try {
+				String maNV = txtMaNV.getText();
+				String hoNV = txtHo.getText();
+				String tenNV = txtTen.getText();
+				boolean phai = radioBtnNam.isSelected();
+				int tuoi = Integer.parseInt(txtTuoi.getText());
+				double tienLuong = Double.parseDouble(txtLuong.getText());
+				if(maNV.equals("") || hoNV.equals("") || tenNV.equals("") || group.getSelection() == null || tuoi == -1 || tienLuong == -1) {
+					JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
+				} else {
+					NhanVien nv = new NhanVien(maNV, hoNV, tenNV, phai, tuoi, tienLuong);
+					if (!listNV.themNhanVien(nv))
+						JOptionPane.showMessageDialog(this, "Mã nhân viên trùng");
+					else {
+						String gioiTinh;
+						if (radioBtnNam.isSelected())
+							gioiTinh = "Nam";
+						else
+							gioiTinh = "Nữ";
+						modelNhanVien.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), gioiTinh,
+								nv.getTuoi(), nv.getTienLuong() });
+						JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+					}
+				}
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin hợp lệ");
+				txtMaNV.requestFocus();
 			}
 		}
-		if (o.equals(btnXoa)) {
-			int r = tblNV.getSelectedRow();
-			// Xoa trong table
-			model.removeRow(r);
-			// Xoa trong ArrayList
-			NhanVien nv = listNV.getElement(r);
-			listNV.xoaNhanVien(nv.getMaNV());
-		}
-
-		if (o.equals(btnXoaTrang)) {
-			txtMaNV.setText("");
-			txtHo.setText("");
-			txtTen.setText("");
-			txtTuoi.setText("");
-			txtTienLuong.setText("");
-		}
 		
-		if(o.equals(btnTim)) {
-			timTheoMaNV();
+		if(o.equals(btnXoaTrang)) {
+			xoaTrang();
 		}
+		if(o.equals(btnXoa)) {
+			int r = tableNhanVien.getSelectedRow();
+			if(r < 0)
+				JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên bạn muốn xóa!!");
+			else {
+				if(JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này không?" + tableNhanVien.getValueAt(r, 1) + " " + tableNhanVien.getValueAt(r, 2), "Lựa chọn", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					modelNhanVien.removeRow(r);
+					NhanVien nv = listNV.getElement(r);
+					listNV.xoaNhanVien(nv.getMaNV());
+					xoaTrang();
+					
+					JOptionPane.showMessageDialog(this, "Xóa thành công");
+				}
+			}
+		}
+		if(o.equals(btnTim)) {
+			String str = txtTim.getText();
+			if(str != null && str.trim().length() > 0) {
+				NhanVien nv = listNV.timKiem(str);
+				if(nv != null) {
+					xoaHetDuLieuTrenTableModel();
+					String gioiTinh;
+					if (nv.isPhai())
+						gioiTinh = "Nam";
+					else
+						gioiTinh = "Nữ";
+					modelNhanVien.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), gioiTinh, nv.getTuoi(),
+							nv.getTienLuong() });
+				} else {
+					JOptionPane.showMessageDialog(this, "Không tìm thấy mã nhân viên");
+					return;
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Vui lòng nhập mã nhân viên cần tìm");
+			}
+		}
+		if(o.equals(btnSua)) {
+			String str = txtMaNV.getText();
+			if(str != null && str.trim().length() > 0) {
+				NhanVien nv = listNV.timKiem(str);
+				if(nv != null) {
+					if(JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật nhân viên có mã " + str + " này không?","Thông báo",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+						nv.setHoNV(txtHo.getText());
+						nv.setTenNV(txtTen.getText());
+						nv.setHoNV(txtHo.getText());
+						nv.setPhai(radioBtnNam.isSelected());
+						nv.setTuoi(Integer.parseInt(txtTuoi.getText()));
+						nv.setTienLuong(Double.parseDouble(txtLuong.getText()));
+						
+						xoaHetDuLieuTrenTableModel();
+						docDuLieuTuArrayListVaoModel();
+						xoaTrang();
+						
+						JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+					}	
+				} else {
+					JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên");
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Chọn nhân viên muốn cập nhật!!");
+			}
+		}
+		if(o.equals(btnLuu)) {
+			try {
+				StoredData stData = new StoredData();
+				stData.writeFile(listNV, "data//DsNV.txt");
+				JOptionPane.showMessageDialog(this, "Lưu thông tin thành công");
+			} catch (Exception e2) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(this, "Lưu thông tin không thành công");
+			}
+		}
+		if(o.equals(btnLamMoi)) {
+			xoaHetDuLieuTrenTableModel();
+			docDuLieuTuArrayListVaoModel();
+			tableNhanVien.setModel(modelNhanVien);
+		}
+	}
+	
+	private void xoaTrang() {
+		txtMaNV.setText("");
+		txtHo.setText("");
+		txtTen.setText("");
+		txtLuong.setText("");
+		txtTuoi.setText("");
+		group.clearSelection();
 	}
 
 	private void docDuLieuTuArrayListVaoModel() {
 		for (int i = 0; i < listNV.getSize(); i++) {
 			NhanVien nv = listNV.getElement(i);
-			model.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), nv.getTuoi(), nv.getPhai(),
-					nv.getLuong() });
+			String gioiTinh;
+			if (nv.isPhai())
+				gioiTinh = "Nam";
+			else
+				gioiTinh = "Nữ";
+			modelNhanVien.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), gioiTinh, nv.getTuoi(),
+					nv.getTienLuong() });
 		}
 	}
 
 	private void xoaHetDuLieuTrenTableModel() {
-		DefaultTableModel dm = (DefaultTableModel) tblNV.getModel();
+		DefaultTableModel dm = (DefaultTableModel) tableNhanVien.getModel();
 		dm.getDataVector().removeAllElements();
 	}
-
-	private void timTheoMaNV() {
-		String maNV = txtTim.getText();
-		if (maNV != null && maNV.trim().length() > 0) {
-			try {
-				NhanVien nv = listNV.timKiem(maNV);
-				if (nv != null) {
-					xoaHetDuLieuTrenTableModel();
-					model.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), nv.getTuoi(), nv.getPhai(),
-							nv.getLuong() });
-				} else {
-					JOptionPane.showMessageDialog(this,"Khong tim thay");
-					return ;
-				}
-			} catch (Exception ex) {
-				// TODO: handle exception
-				JOptionPane.showMessageDialog(this,"Du lieu khong hop le");
-				txtTim.selectAll();
-				txtTim.requestFocus();
-			}
-		} else {
-			xoaHetDuLieuTrenTableModel();
-			docDuLieuTuArrayListVaoModel();
-			tblNV.setModel(model);
-		}
+	
+	private void taoCung() {
+		NhanVien nv1 = new NhanVien("1111", "Nguyễn", "Hoàng", true, 26, 4500);
+		NhanVien nv2 = new NhanVien("2222", "Lê", "Thu", false, 28, 5000);
+		NhanVien nv3 = new NhanVien("3333", "Hoàng", "Lê", true, 30, 5000);
+		NhanVien nv4 = new NhanVien("4444", "Trần", "Lan", false, 27, 3500);
+		listNV.themNhanVien(nv1);
+		listNV.themNhanVien(nv2);
+		listNV.themNhanVien(nv3);
+		listNV.themNhanVien(nv4);
+		docDuLieuTuArrayListVaoModel();
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		int row = tblNV.getSelectedRow();
-		txtMaNV.setText(model.getValueAt(row, 0).toString());
-		txtHo.setText(model.getValueAt(row, 1).toString());
-		txtTen.setText(model.getValueAt(row, 2).toString());
-		txtTuoi.setText(model.getValueAt(row, 3).toString());
-		comboBox.setSelectedItem(model.getValueAt(row, 4).toString());
-		txtMaNV.setText(model.getValueAt(row, 5).toString());
+		int row = tableNhanVien.getSelectedRow();
+		txtMaNV.setText(modelNhanVien.getValueAt(row, 0).toString());
+		txtHo.setText(modelNhanVien.getValueAt(row, 1).toString());
+		txtTen.setText(modelNhanVien.getValueAt(row, 2).toString());
+		if(modelNhanVien.getValueAt(row, 3).toString().equals("Nam")) {
+			radioBtnNam.setSelected(true);
+		}
+		else radioBtnNu.setSelected(true);
+		txtTuoi.setText(modelNhanVien.getValueAt(row, 4).toString());
+		txtLuong.setText(modelNhanVien.getValueAt(row, 5).toString());
+		
+		
 	}
 
 	@Override

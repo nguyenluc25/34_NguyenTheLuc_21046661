@@ -84,5 +84,4 @@ public class NhanVien implements Serializable{
 		return Objects.equals(maNV, other.maNV);
 	}
 	
-	
 }

@@ -35,17 +35,18 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 	private static final long serialVersionUID = 1L;
 
 	private NhanVien_Collection listNV;
-
+	
 	private JTextField txtMaNV;
 	private JTextField txtHo;
 	private JTextField txtTen;
 	private JTextField txtTuoi;
+	private JTextField txtLuong;
+	private JTextField txtTim;
 	private JRadioButton radioBtnNam;
 	private JRadioButton radioBtnNu;
-	private JTextField txtLuong;
+	private ButtonGroup group;
 	private DefaultTableModel modelNhanVien;
 	private JTable tableNhanVien;
-	private JTextField txtTim;
 	private JButton btnTim;
 	private JButton btnThem;
 	private JButton btnXoaTrang;
@@ -53,8 +54,6 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 	private JButton btnSua;
 	private JButton btnLuu;
 	private JButton btnLamMoi;
-	private ButtonGroup group;
-
 
 
 	public GUIThongTinNhanVien() {
@@ -94,30 +93,28 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 
 		JLabel lblMaNV = new JLabel("Mã nhân viên: ");
 		txtMaNV = new JTextField(55);
-		JLabel lblHo = new JLabel("Họ: ");
-		txtHo = new JTextField();
-		JLabel lblTen = new JLabel("Tên nhân viên: ");
-		txtTen = new JTextField();
-		JLabel lblTuoi = new JLabel("Tuổi: ");
-		txtTuoi = new JTextField();
-		JLabel lblPhai = new JLabel("Phái: ");
-		radioBtnNam = new JRadioButton("Nam", true);
-		radioBtnNu = new JRadioButton("Nữ");
-		group = new ButtonGroup();
-		JLabel lblLuong = new JLabel("Tiền Lương: ");
-		txtLuong = new JTextField();
-
-		// thêm component vào JFrame
 		b1.add(lblMaNV);
 		b1.add(txtMaNV);
 		panelCenter.add(b1);
 		panelCenter.add(Box.createVerticalStrut(5));
+		
+		JLabel lblHo = new JLabel("Họ: ");
+		txtHo = new JTextField();
+		JLabel lblTen = new JLabel("Tên nhân viên: ");
+		txtTen = new JTextField();
 		b2.add(lblHo);
 		b2.add(txtHo);
 		b2.add(lblTen);
 		b2.add(txtTen);
 		panelCenter.add(b2);
 		panelCenter.add(Box.createVerticalStrut(5));
+		
+		JLabel lblTuoi = new JLabel("Tuổi: ");
+		txtTuoi = new JTextField();
+		JLabel lblPhai = new JLabel("Phái: ");
+		radioBtnNam = new JRadioButton("Nam", true);
+		radioBtnNu = new JRadioButton("Nữ");
+		group = new ButtonGroup();
 		b3.add(lblTuoi);
 		b3.add(txtTuoi);
 		b3.add(lblPhai);
@@ -127,11 +124,14 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		b3.add(radioBtnNu);
 		panelCenter.add(b3);
 		panelCenter.add(Box.createVerticalStrut(5));
+		
+		JLabel lblLuong = new JLabel("Tiền Lương: ");
+		txtLuong = new JTextField();
 		b4.add(lblLuong);
 		b4.add(txtLuong);
 		panelCenter.add(b4);
 		panelCenter.add(Box.createVerticalStrut(5));
-
+	
 
 		lblHo.setPreferredSize(lblMaNV.getPreferredSize());
 		lblTuoi.setPreferredSize(lblMaNV.getPreferredSize());

@@ -37,6 +37,18 @@ public class NhanVien_Collection implements Serializable{
 		}
 		return false;
 	}
+	
+	//trả về số lượng phần tử trong danh sách
+	public int getSize() {
+		return dsNV.size();
+	}
+	
+	//phương thức lấy 1 phần tử tại vị trí chỉ định index
+	public NhanVien getElement(int index) {
+		if(index < 0 || index > dsNV.size())
+			return null;
+		return dsNV.get(index);
+	}
 
 	public ArrayList<NhanVien> getDsNV() {
 		return dsNV;
@@ -44,18 +56,6 @@ public class NhanVien_Collection implements Serializable{
 
 	public void setDsNV(ArrayList<NhanVien> dsNV) {
 		this.dsNV = dsNV;
-	}
-	
-	//trả về số lượng phần tử trong danh sách
-	public int getSize() {
-		return dsNV.size();
-	}
-	
-	
-	public NhanVien getElement(int index) {
-		if(index < 0 || index > dsNV.size())
-			return null;
-		return dsNV.get(index);
 	}
 
 }

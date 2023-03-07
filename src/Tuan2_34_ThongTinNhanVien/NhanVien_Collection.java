@@ -10,6 +10,7 @@ public class NhanVien_Collection implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<NhanVien> dsNV;
 	
+	//phương thức khởi tạo
 	public NhanVien_Collection() {
 		dsNV = new ArrayList<NhanVien>();
 	}

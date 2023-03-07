@@ -67,47 +67,45 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 
 		// phần north
 
-		// khai báo các component
 		JPanel panelNorth = new JPanel();
+		this.add(panelNorth, BorderLayout.NORTH);
+		
 		JLabel lblTitle = new JLabel("THÔNG TIN NHÂN VIÊN");
-
-		// thiêt lập component
 		lblTitle.setForeground(Color.BLUE);
 		lblTitle.setFont(new Font("Arial", Font.BOLD, 25));
-
 		panelNorth.add(lblTitle);
-		// thêm các component vào JFrame
-		this.add(panelNorth, BorderLayout.NORTH);
+		
 
 		// phần center
 
 		// khai báo các component
 		JPanel panelCenter = new JPanel();
 		panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
+		this.add(panelCenter, BorderLayout.CENTER);
 
 		// phần nhập dữ liệu
-		Box b1 = Box.createHorizontalBox();
-		Box b2 = Box.createHorizontalBox();
-		Box b3 = Box.createHorizontalBox();
-		Box b4 = Box.createHorizontalBox();
+		
+		
+		
+		
 
 		JLabel lblMaNV = new JLabel("Mã nhân viên: ");
 		txtMaNV = new JTextField(55);
+		Box b1 = Box.createHorizontalBox();
 		b1.add(lblMaNV);
 		b1.add(txtMaNV);
-		panelCenter.add(b1);
-		panelCenter.add(Box.createVerticalStrut(5));
+		
 		
 		JLabel lblHo = new JLabel("Họ: ");
 		txtHo = new JTextField();
 		JLabel lblTen = new JLabel("Tên nhân viên: ");
 		txtTen = new JTextField();
+		Box b2 = Box.createHorizontalBox();
 		b2.add(lblHo);
 		b2.add(txtHo);
 		b2.add(lblTen);
 		b2.add(txtTen);
-		panelCenter.add(b2);
-		panelCenter.add(Box.createVerticalStrut(5));
+		
 		
 		JLabel lblTuoi = new JLabel("Tuổi: ");
 		txtTuoi = new JTextField();
@@ -115,20 +113,29 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		radioBtnNam = new JRadioButton("Nam", true);
 		radioBtnNu = new JRadioButton("Nữ");
 		group = new ButtonGroup();
+		group.add(radioBtnNam);
+		group.add(radioBtnNu);
+		Box b3 = Box.createHorizontalBox();
 		b3.add(lblTuoi);
 		b3.add(txtTuoi);
 		b3.add(lblPhai);
-		group.add(radioBtnNam);
-		group.add(radioBtnNu);
 		b3.add(radioBtnNam);
 		b3.add(radioBtnNu);
-		panelCenter.add(b3);
-		panelCenter.add(Box.createVerticalStrut(5));
+		
 		
 		JLabel lblLuong = new JLabel("Tiền Lương: ");
 		txtLuong = new JTextField();
+		Box b4 = Box.createHorizontalBox();
 		b4.add(lblLuong);
 		b4.add(txtLuong);
+		
+		
+		panelCenter.add(b1);
+		panelCenter.add(Box.createVerticalStrut(5));
+		panelCenter.add(b2);
+		panelCenter.add(Box.createVerticalStrut(5));
+		panelCenter.add(b3);
+		panelCenter.add(Box.createVerticalStrut(5));
 		panelCenter.add(b4);
 		panelCenter.add(Box.createVerticalStrut(5));
 	
@@ -141,27 +148,28 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		String[] column = { "Mã NV", "Họ", "Tên", "Phái", "Tuổi", "Tiền lương" };
 		String[] options = { "Nam", "Nữ" };
 
-		// khai báo các component
 		JPanel panelTable = new JPanel();
+		panelCenter.add(panelTable);
 		modelNhanVien = new DefaultTableModel(column, 0);
 		tableNhanVien = new JTable(modelNhanVien);
 		JScrollPane sp = new JScrollPane(tableNhanVien, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		TableColumn phaiColumn;
+		sp.setPreferredSize(new Dimension(715, 250));
+		panelTable.add(sp);
+		
 		JComboBox<String> comboBox = new JComboBox<>(options);
-
-		// thiết lập các component
+		TableColumn phaiColumn;
 		phaiColumn = tableNhanVien.getColumnModel().getColumn(3);
 		phaiColumn.setCellEditor(new DefaultCellEditor(comboBox));
-		sp.setPreferredSize(new Dimension(715, 250));
+		
 
-		// thêm các component vào JFrame
-		panelTable.add(sp);
-		panelCenter.add(panelTable);
-		this.add(panelCenter, BorderLayout.CENTER);
+		
+		
+		
 
 		// phần south
 		JPanel panelSouth = new JPanel();
+		this.add(panelSouth, BorderLayout.SOUTH);
 
 		JPanel panelSouthLeft = new JPanel();
 		JLabel lblTim = new JLabel("Nhập mã số cần tìm: ");
@@ -187,15 +195,16 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		panelSouthRight.add(btnSua);
 		panelSouthRight.add(btnLuu);
 
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		panelSouth.add(panelSouthLeft);
 		panelSouth.add(panelSouthRight);
+		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		split.add(panelSouthLeft);
 		split.add(panelSouthRight);
 		panelSouth.add(split);
-		this.add(panelSouth, BorderLayout.SOUTH);
+		
 		
 		listNV = new NhanVien_Collection();
+		
 		StoredData stData = new StoredData();
 		try {
 			listNV = (NhanVien_Collection) stData.readFile("data//DsNV.txt");
@@ -254,7 +263,6 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 			} catch (Exception e2) {
 				// TODO: handle exception
 				JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin hợp lệ");
-				txtMaNV.requestFocus();
 			}
 		}
 		
@@ -271,7 +279,6 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 					NhanVien nv = listNV.getElement(r);
 					listNV.xoaNhanVien(nv.getMaNV());
 					xoaTrang();
-					
 					JOptionPane.showMessageDialog(this, "Xóa thành công");
 				}
 			}
@@ -291,7 +298,6 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 							nv.getTienLuong() });
 				} else {
 					JOptionPane.showMessageDialog(this, "Không tìm thấy mã nhân viên");
-					return;
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Vui lòng nhập mã nhân viên cần tìm");
@@ -315,7 +321,9 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 						xoaTrang();
 						
 						JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-					}	
+					} else {
+						JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
+					}
 				} else {
 					JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên");
 				}

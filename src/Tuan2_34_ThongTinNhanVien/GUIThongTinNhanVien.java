@@ -58,14 +58,14 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 
 	public GUIThongTinNhanVien() {
 		// TODO Auto-generated constructor stub
-		// thiáº¿t láº­p thuá»™c tÃ­nh cho JFrame
+		// thiết lập thuộc tính cho JFrame
 		setTitle("^-^");
 		setSize(900, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		// pháº§n north
+		// Phần north
 
 		JPanel panelNorth = new JPanel();
 		this.add(panelNorth, BorderLayout.NORTH);
@@ -76,29 +76,22 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		panelNorth.add(lblTitle);
 		
 
-		// pháº§n center
+		// Phần center
 
-		// khai bÃ¡o cÃ¡c component
 		JPanel panelCenter = new JPanel();
 		panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 		this.add(panelCenter, BorderLayout.CENTER);
 
-		// pháº§n nháº­p dá»¯ liá»‡u
-		
-		
-		
-		
-
-		JLabel lblMaNV = new JLabel("MÃ£ nhÃ¢n viÃªn: ");
+		JLabel lblMaNV = new JLabel("Mã nhân viên: ");
 		txtMaNV = new JTextField(55);
 		Box b1 = Box.createHorizontalBox();
 		b1.add(lblMaNV);
 		b1.add(txtMaNV);
 		
 		
-		JLabel lblHo = new JLabel("Há»�: ");
+		JLabel lblHo = new JLabel("Họ: ");
 		txtHo = new JTextField();
-		JLabel lblTen = new JLabel("TÃªn nhÃ¢n viÃªn: ");
+		JLabel lblTen = new JLabel("Tên nhân viên: ");
 		txtTen = new JTextField();
 		Box b2 = Box.createHorizontalBox();
 		b2.add(lblHo);
@@ -107,11 +100,11 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		b2.add(txtTen);
 		
 		
-		JLabel lblTuoi = new JLabel("Tuá»•i: ");
+		JLabel lblTuoi = new JLabel("Tuổi: ");
 		txtTuoi = new JTextField();
-		JLabel lblPhai = new JLabel("PhÃ¡i: ");
+		JLabel lblPhai = new JLabel("Phái: ");
 		radioBtnNam = new JRadioButton("Nam", true);
-		radioBtnNu = new JRadioButton("Ná»¯");
+		radioBtnNu = new JRadioButton("Nữ");
 		group = new ButtonGroup();
 		group.add(radioBtnNam);
 		group.add(radioBtnNu);
@@ -123,7 +116,7 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		b3.add(radioBtnNu);
 		
 		
-		JLabel lblLuong = new JLabel("Tiá»�n LÆ°Æ¡ng: ");
+		JLabel lblLuong = new JLabel("Tiền lương: ");
 		txtLuong = new JTextField();
 		Box b4 = Box.createHorizontalBox();
 		b4.add(lblLuong);
@@ -144,9 +137,9 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		lblTuoi.setPreferredSize(lblMaNV.getPreferredSize());
 		lblLuong.setPreferredSize(lblMaNV.getPreferredSize());
 
-		// pháº§n table
-		String[] column = { "MÃ£ NV", "Há»�", "TÃªn", "PhÃ¡i", "Tuá»•i", "Tiá»�n lÆ°Æ¡ng" };
-		String[] options = { "Nam", "Ná»¯" };
+		// phần table
+		String[] column = { "Mã NV", "Họ", "Tên", "Phái", "Tuổi", "Tiền lương" };
+		String[] options = { "Nam", "Nữ" };
 
 		JPanel panelTable = new JPanel();
 		panelCenter.add(panelTable);
@@ -167,26 +160,26 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		
 		
 
-		// pháº§n south
+		// phần south
 		JPanel panelSouth = new JPanel();
 		this.add(panelSouth, BorderLayout.SOUTH);
 
 		JPanel panelSouthLeft = new JPanel();
-		JLabel lblTim = new JLabel("Nháº­p mÃ£ sá»‘ cáº§n tÃ¬m: ");
+		JLabel lblTim = new JLabel("Nhập mã cần tìm: ");
 		txtTim = new JTextField(7);
-		btnTim = new JButton("TÃ¬m");
+		btnTim = new JButton("Tìm");
 
 		panelSouthLeft.add(lblTim);
 		panelSouthLeft.add(txtTim);
 		panelSouthLeft.add(btnTim);
 
 		JPanel panelSouthRight = new JPanel();
-		btnThem = new JButton("ThÃªm");
-		btnXoaTrang = new JButton("XÃ³a tráº¯ng");
-		btnXoa = new JButton("XÃ³a");
-		btnSua = new JButton("Sá»­a");
-		btnLuu = new JButton("LÆ°u");
-		btnLamMoi = new JButton("LÃ m má»›i");
+		btnThem = new JButton("Thêm");
+		btnXoaTrang = new JButton("Xóa trắng");
+		btnXoa = new JButton("Xóa");
+		btnSua = new JButton("Sửa");
+		btnLuu = new JButton("Lưu");
+		btnLamMoi = new JButton("Làm mới");
 		
 		panelSouthRight.add(btnLamMoi);
 		panelSouthRight.add(btnThem);
@@ -208,7 +201,7 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		docDuLieuTuArrayListVaoModel();
 		
 //		taoCung();
-		// sá»± kiá»‡n
+		// sự kiện
 		btnThem.addActionListener(this);
 		btnXoa.addActionListener(this);
 		btnXoaTrang.addActionListener(this);
@@ -237,26 +230,26 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 				int tuoi = Integer.parseInt(txtTuoi.getText());
 				double tienLuong = Double.parseDouble(txtLuong.getText());
 				if(maNV.equals("") || hoNV.equals("") || tenNV.equals("") || group.getSelection() == null || tuoi == -1 || tienLuong == -1) {
-					JOptionPane.showMessageDialog(this, "Vui lÃ²ng nháº­p Ä‘áº§y Ä‘á»§ thÃ´ng tin");
+					JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
 				} else {
 					NhanVien nv = new NhanVien(maNV, hoNV, tenNV, phai, tuoi, tienLuong);
 					if (!listNV.themNhanVien(nv))
-						JOptionPane.showMessageDialog(this, "MÃ£ nhÃ¢n viÃªn trÃ¹ng");
+						JOptionPane.showMessageDialog(this, "Mã nhân viên trùng");
 					else {
 						String gioiTinh;
 						if (radioBtnNam.isSelected())
 							gioiTinh = "Nam";
 						else
-							gioiTinh = "Ná»¯";
+							gioiTinh = "Nữ";
 						modelNhanVien.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), gioiTinh,
 								nv.getTuoi(), nv.getTienLuong() });
-						JOptionPane.showMessageDialog(this, "ThÃªm nhÃ¢n viÃªn thÃ nh cÃ´ng");
+						JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
 					}
 				}
 				
 			} catch (Exception e2) {
 				// TODO: handle exception
-				JOptionPane.showMessageDialog(this, "Vui lÃ²ng nháº­p thÃ´ng tin há»£p lá»‡");
+				JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin hợp lệ");
 			}
 		}
 		
@@ -266,14 +259,14 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		if(o.equals(btnXoa)) {
 			int r = tableNhanVien.getSelectedRow();
 			if(r < 0)
-				JOptionPane.showMessageDialog(this, "Vui lÃ²ng chá»�n nhÃ¢n viÃªn báº¡n muá»‘n xÃ³a!!");
+				JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên muốn xóa!!");
 			else {
-				if(JOptionPane.showConfirmDialog(this, "Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a nhÃ¢n viÃªn nÃ y khÃ´ng?" + tableNhanVien.getValueAt(r, 1) + " " + tableNhanVien.getValueAt(r, 2), "Lá»±a chá»�n", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if(JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa nhân viên này không?" + tableNhanVien.getValueAt(r, 1) + " " + tableNhanVien.getValueAt(r, 2), "Thông báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					modelNhanVien.removeRow(r);
 					NhanVien nv = listNV.getElement(r);
 					listNV.xoaNhanVien(nv.getMaNV());
 					xoaTrang();
-					JOptionPane.showMessageDialog(this, "XÃ³a thÃ nh cÃ´ng");
+					JOptionPane.showMessageDialog(this, "Xóa thành công");
 				}
 			}
 		}
@@ -287,14 +280,14 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 					if (nv.isPhai())
 						gioiTinh = "Nam";
 					else
-						gioiTinh = "Ná»¯";
+						gioiTinh = "Nữ";
 					modelNhanVien.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), gioiTinh, nv.getTuoi(),
 							nv.getTienLuong() });
 				} else {
-					JOptionPane.showMessageDialog(this, "KhÃ´ng tÃ¬m tháº¥y mÃ£ nhÃ¢n viÃªn");
+					JOptionPane.showMessageDialog(this, "Không tìm thấy mã nhân viên");
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Vui lÃ²ng nháº­p mÃ£ nhÃ¢n viÃªn cáº§n tÃ¬m");
+				JOptionPane.showMessageDialog(this, "Vui lòng nhập nhân viên cần tìm");
 			}
 		}
 		if(o.equals(btnSua)) {
@@ -302,7 +295,7 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 			if(str != null && str.trim().length() > 0) {
 				NhanVien nv = listNV.timKiem(str);
 				if(nv != null) {
-					if(JOptionPane.showConfirmDialog(this, "Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n cáº­p nháº­t nhÃ¢n viÃªn cÃ³ mÃ£ " + str + " nÃ y khÃ´ng?","ThÃ´ng bÃ¡o",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					if(JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn cập nhật nhân viên có mã: " + str + " này không?","Thông báo",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 						nv.setHoNV(txtHo.getText());
 						nv.setTenNV(txtTen.getText());
 						nv.setHoNV(txtHo.getText());
@@ -314,24 +307,24 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 						docDuLieuTuArrayListVaoModel();
 						xoaTrang();
 						
-						JOptionPane.showMessageDialog(this, "Cáº­p nháº­t thÃ nh cÃ´ng");
+						JOptionPane.showMessageDialog(this, "Cập nhật thành công");
 					} else {
-						JOptionPane.showMessageDialog(this, "Cáº­p nháº­t khÃ´ng thÃ nh cÃ´ng");
+						JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
 					}
 				} else {
-					JOptionPane.showMessageDialog(this, "KhÃ´ng tÃ¬m tháº¥y nhÃ¢n viÃªn");
+					JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên");
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Chá»�n nhÃ¢n viÃªn muá»‘n cáº­p nháº­t!!");
+				JOptionPane.showMessageDialog(this, "Chọn nhân viên muốn cập nhật!!");
 			}
 		}
 		if(o.equals(btnLuu)) {
 			try {
 				Database.ghiXuongFile(listNV.getDsNV());
-				JOptionPane.showMessageDialog(this, "LÆ°u thÃ´ng tin thÃ nh cÃ´ng");
+				JOptionPane.showMessageDialog(this, "Lưu thông tin thành công");
 			} catch (Exception e2) {
 				// TODO: handle exception
-				JOptionPane.showMessageDialog(this, "LÆ°u thÃ´ng tin khÃ´ng thÃ nh cÃ´ng");
+				JOptionPane.showMessageDialog(this, "Lưu thông tin không thành công");
 			}
 		}
 		if(o.equals(btnLamMoi)) {
@@ -357,7 +350,7 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 			if (nv.isPhai())
 				gioiTinh = "Nam";
 			else
-				gioiTinh = "Ná»¯";
+				gioiTinh = "Nữ";
 			modelNhanVien.addRow(new Object[] { nv.getMaNV(), nv.getHoNV(), nv.getTenNV(), gioiTinh, nv.getTuoi(),
 					nv.getTienLuong() });
 		}
@@ -369,10 +362,10 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 	}
 	
 	private void taoCung() {
-		NhanVien nv1 = new NhanVien("1111", "Nguyá»…n", "HoÃ ng", true, 26, 4500);
-		NhanVien nv2 = new NhanVien("2222", "LÃª", "Thu", false, 28, 5000);
-		NhanVien nv3 = new NhanVien("3333", "HoÃ ng", "LÃª", true, 30, 5000);
-		NhanVien nv4 = new NhanVien("4444", "Tráº§n", "Lan", false, 27, 3500);
+		NhanVien nv1 = new NhanVien("1111", "Nguyễn", "Hoàng", true, 26, 4500);
+		NhanVien nv2 = new NhanVien("2222", "Lê", "Thu", false, 28, 5000);
+		NhanVien nv3 = new NhanVien("3333", "Hoàng", "Lê", true, 30, 5000);
+		NhanVien nv4 = new NhanVien("4444", "Trương", "Lan", false, 27, 3500);
 		listNV.themNhanVien(nv1);
 		listNV.themNhanVien(nv2);
 		listNV.themNhanVien(nv3);

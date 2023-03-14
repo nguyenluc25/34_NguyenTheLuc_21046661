@@ -84,4 +84,10 @@ public class NhanVien implements Serializable{
 		return Objects.equals(maNV, other.maNV);
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return maNV + ";" + hoNV + ";" + tenNV + ";" + phai + ";" + tuoi + ";" + tienLuong;
+	}
+	
 }

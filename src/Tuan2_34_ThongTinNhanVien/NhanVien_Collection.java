@@ -15,6 +15,9 @@ public class NhanVien_Collection implements Serializable{
 		dsNV = new ArrayList<NhanVien>();
 	}
 	
+	public void napDuLieuTuFile() {
+		dsNV = Database.docTuFile();
+	}
 	//thêm 1 nhân viên vào danh sách
 	public boolean themNhanVien(NhanVien nv) {
 		if(dsNV.contains(nv))

@@ -1,0 +1,7 @@
+MaSach;TuaSach;TacGia;NamXuatBan;NhaXuatBan;SoTrang;DonGia;ISBN
+A001;Annotations Reflection;Jakob Jenkov;2014;Prentice Hall;420;70000.0;0-13-376131-1
+J002;Java Enterprise;O'Reilly;2012;Prentice Hall;314;120000.0;0-7506-6098-8
+A002;Annotations Reflection;Jakob Jenkov;2014;Prentice Hall;420;70000.0;0-13-376131-1
+H004;Hibernate Tutorial;Gavin King;2014;Prentice Hall;352;90000.0;978-0-13-37611-32
+A003;Annotations Reflection;Jakob Jenkov;2014;Prentice Hall;420;70000.0;0-13-376131-1
+H234;Hibernate Tutorial;Gavin King;2014;Prentice Hall;3522;90000.0;978-0-13-37611-3

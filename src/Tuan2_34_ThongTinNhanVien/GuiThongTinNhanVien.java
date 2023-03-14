@@ -375,17 +375,17 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		dm.getDataVector().removeAllElements();
 	}
 	
-	private void taoCung() {
-		NhanVien nv1 = new NhanVien("1111", "Nguyễn", "Hoàng", true, 26, 4500);
-		NhanVien nv2 = new NhanVien("2222", "Lê", "Thu", false, 28, 5000);
-		NhanVien nv3 = new NhanVien("3333", "Hoàng", "Lê", true, 30, 5000);
-		NhanVien nv4 = new NhanVien("4444", "Trần", "Lan", false, 27, 3500);
-		listNV.themNhanVien(nv1);
-		listNV.themNhanVien(nv2);
-		listNV.themNhanVien(nv3);
-		listNV.themNhanVien(nv4);
-		docDuLieuTuArrayListVaoModel();
-	}
+//	private void taoCung() {
+//		NhanVien nv1 = new NhanVien("1111", "Nguyễn", "Hoàng", true, 26, 4500);
+//		NhanVien nv2 = new NhanVien("2222", "Lê", "Thu", false, 28, 5000);
+//		NhanVien nv3 = new NhanVien("3333", "Hoàng", "Lê", true, 30, 5000);
+//		NhanVien nv4 = new NhanVien("4444", "Trần", "Lan", false, 27, 3500);
+//		listNV.themNhanVien(nv1);
+//		listNV.themNhanVien(nv2);
+//		listNV.themNhanVien(nv3);
+//		listNV.themNhanVien(nv4);
+//		docDuLieuTuArrayListVaoModel();
+//	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

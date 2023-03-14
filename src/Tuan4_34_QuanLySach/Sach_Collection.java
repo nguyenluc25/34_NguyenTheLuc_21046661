@@ -2,13 +2,17 @@ package Tuan4_34_QuanLySach;
 
 import java.util.ArrayList;
 
-import Tuan2_34_ThongTinNhanVien.NhanVien;
+
 
 public class Sach_Collection {
 	private ArrayList<Sach> dsSach;
 	
 	public Sach_Collection() {
 		dsSach = new ArrayList<Sach>();
+	}
+	
+	public void napDuLieuTuFile() {
+		dsSach = Database.docTuFile();
 	}
 	
 	public boolean themSach(Sach sach) {
@@ -38,11 +42,11 @@ public class Sach_Collection {
 			return null;
 	}
 	
-	private int getSize() {
+	public int getSize() {
 		return dsSach.size();
 	}
 	
-	private Sach getElement(int index) {
+	public Sach getElement(int index) {
 		if(index < 0 || index > dsSach.size())
 			return null;
 		else

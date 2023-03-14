@@ -19,7 +19,7 @@ public class Sach {
 	}
 	
 	public Sach(String maSach, String tuaSach, String tacGia, int namXuatBan, String nhaXuatBan, int soTrang,
-			double donGia, String iSBN) {
+			double donGia, String ISBN) {
 		super();
 		this.maSach = maSach;
 		this.tuaSach = tuaSach;
@@ -28,7 +28,73 @@ public class Sach {
 		this.nhaXuatBan = nhaXuatBan;
 		this.soTrang = soTrang;
 		this.donGia = donGia;
-		ISBN = iSBN;
+		this.ISBN = ISBN;
+	}
+	
+	
+
+	public String getMaSach() {
+		return maSach;
+	}
+
+	public void setMaSach(String maSach) {
+		this.maSach = maSach;
+	}
+
+	public String getTuaSach() {
+		return tuaSach;
+	}
+
+	public void setTuaSach(String tuaSach) {
+		this.tuaSach = tuaSach;
+	}
+
+	public String getTacGia() {
+		return tacGia;
+	}
+
+	public void setTacGia(String tacGia) {
+		this.tacGia = tacGia;
+	}
+
+	public int getNamXuatBan() {
+		return namXuatBan;
+	}
+
+	public void setNamXuatBan(int namXuatBan) {
+		this.namXuatBan = namXuatBan;
+	}
+
+	public String getNhaXuatBan() {
+		return nhaXuatBan;
+	}
+
+	public void setNhaXuatBan(String nhaXuatBan) {
+		this.nhaXuatBan = nhaXuatBan;
+	}
+
+	public int getSoTrang() {
+		return soTrang;
+	}
+
+	public void setSoTrang(int soTrang) {
+		this.soTrang = soTrang;
+	}
+
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
+	}
+
+	public String getISBN() {
+		return ISBN;
+	}
+
+	public void setISBN(String ISBN) {
+		this.ISBN = ISBN;
 	}
 
 	@Override
@@ -56,5 +122,11 @@ public class Sach {
 		return true;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return maSach + ";" + tuaSach + ";"
+				+ tacGia + ";" + namXuatBan + ";" + nhaXuatBan
+				+ ";" + soTrang + ";" + donGia + ";"
+				+ ISBN ;
+	}
 }

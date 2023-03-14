@@ -23,6 +23,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			//Nguyễn Thế Lực
 		}
 	}
 	

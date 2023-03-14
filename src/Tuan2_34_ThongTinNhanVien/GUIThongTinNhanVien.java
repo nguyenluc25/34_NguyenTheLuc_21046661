@@ -70,7 +70,7 @@ public class GUIThongTinNhanVien extends JFrame implements ActionListener, Mouse
 		JPanel panelNorth = new JPanel();
 		this.add(panelNorth, BorderLayout.NORTH);
 		
-		JLabel lblTitle = new JLabel("THÃ”NG TIN NHÃ‚N VIÃŠN");
+		JLabel lblTitle = new JLabel("THÔNG TIN NHÂN VIÊN");
 		lblTitle.setForeground(Color.BLUE);
 		lblTitle.setFont(new Font("Arial", Font.BOLD, 25));
 		panelNorth.add(lblTitle);
